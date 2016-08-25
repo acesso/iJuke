@@ -1,0 +1,59 @@
+#include "juke.h"
+
+FORM ID formID_juke AT ( 0 0 160 160 )
+NOFRAME
+USABLE
+MENUID menuID_juke
+BEGIN
+    TITLE "Juke"
+    FIELD ID fieldID_text AT (30 25 100 AUTO ) USABLE LEFTALIGN FONT 0 EDITABLE
+            UNDERLINED SINGLELINE MAXCHARS 20
+    BUTTON "Read from Serial" ID buttonID_convert AT ( 2 46 AUTO AUTO) USABLE FRAME FONT 0
+    BUTTON "Send to Serial" ID buttonID_send AT ( 2 60 AUTO AUTO) USABLE FRAME FONT 0 
+    FIELD ID fieldID_hex AT (30 80 100 50 ) USABLE LEFTALIGN FONT 0 NONEDITABLE
+               MULTIPLELINES MAXCHARS 90
+    GRAFFITISTATEINDICATOR AT (145 150)
+END 
+
+VERSION 1 "1.0"
+ICON "juke.bmp"
+BITMAP ID bitmapID_text "text.bmp"
+BITMAP ID bitmapID_hex  "hex.bmp"
+
+MENU ID menuID_juke
+BEGIN
+  PULLDOWN "Commands"
+  BEGIN
+    MENUITEM "Convert" menuitemID_convert
+    MENUITEM "About"   menuitemID_about   "A"
+  END
+  PULLDOWN "Edit"
+  BEGIN
+    MENUITEM "Copy"    menuitemID_copy    "C"
+    MENUITEM "Paste"   menuitemID_paste   "P"
+  END
+END
+
+ALERT ID alertID_about
+INFORMATION
+BEGIN
+  TITLE "About Juke"
+  MESSAGE "Demo program for the GNU Pilot SDK tutorial"
+  BUTTONS "Done"
+END
+
+ALERT ID alertID_errornullstring
+ERROR
+BEGIN
+  TITLE "Error"
+  MESSAGE "Cannot convert a null string"
+  BUTTONS "Oops"
+END
+
+ALERT ID alertID_senderror
+ERROR
+BEGIN
+  TITLE "Error"
+  MESSAGE "Unable to send to serial"
+  BUTTONS "Ok"
+END
